@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -66,8 +67,15 @@ public class DBConfig {
 
 	}
 	
+	@Bean
 	public JdbcTemplate getJdbcTemplate()
 	{
 		return new JdbcTemplate(getDataSource());
+	}
+	
+	@Bean
+	public NamedParameterJdbcTemplate getNamedJdbcTemplate()
+	{
+		return new NamedParameterJdbcTemplate(getDataSource());
 	}
 }
